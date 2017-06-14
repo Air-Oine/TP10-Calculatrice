@@ -1,6 +1,6 @@
 package com.example.admin.tp10_calculatrice;
 
-import android.icu.util.ValueIterator;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,10 +20,15 @@ public class Calculette extends AppCompatActivity {
     public static final String MINUS = "MINUS";
     public static final String ADD = "ADD";
 
+    public static final String STACK_SAVE = "STACK_SAVE";
+    public static final String SAISIE_SAVE = "SAISIE_SAVE";
+    public static final String DOT = ".";
+
     private Stack<Float> pile = new Stack<>();
 
     TextView saisie;
     List<TextView> numbersDisplayed = new ArrayList<>();
+    SharedPreferences sharedPreferences;
 
 
     @Override
@@ -37,11 +42,24 @@ public class Calculette extends AppCompatActivity {
         numbersDisplayed.add((TextView) findViewById(R.id.number2));
         numbersDisplayed.add((TextView) findViewById(R.id.number3));
         numbersDisplayed.add((TextView) findViewById(R.id.number4));
+
+        sharedPreferences = getSharedPreferences("TP10", MODE_PRIVATE);
+
+        //TODO Chargement de la sauvegarde non effectué
+        //String stackString = sharedPreferences.getString(STACK_SAVE, null);
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //Sauvegarde de la stack et de la saisie lors de la fermeture
+        sharedPreferences = getSharedPreferences("TP10", MODE_PRIVATE);
+
+        sharedPreferences.edit()
+                .putString(STACK_SAVE, pile.toString())
+                .putString(SAISIE_SAVE, saisie.getText().toString())
+                .commit();
     }
 
     //LISTENERS
@@ -88,7 +106,7 @@ public class Calculette extends AppCompatActivity {
     }
 
     public void dot(View view) {
-        type(".");
+        type(DOT);
     }
 
     //Contrôles
@@ -108,21 +126,21 @@ public class Calculette extends AppCompatActivity {
     public void back(View view) {
         String valueString = saisie.getText().toString();
 
-        if(!valueString.isEmpty()) {
-            valueString = valueString.substring(0, valueString.length()-1);
+        if (!valueString.isEmpty()) {
+            valueString = valueString.substring(0, valueString.length() - 1);
 
             saisie.setText(valueString);
         }
     }
 
     public void pop(View view) {
-        if(pile.size() > 0) {
+        if (pile.size() > 0) {
             popStack();
         }
     }
 
     public void swap(View view) {
-        if(pile.size() > 1) {
+        if (pile.size() > 1) {
             Float value1 = pile.pop();
             Float value2 = pile.pop();
 
@@ -157,7 +175,7 @@ public class Calculette extends AppCompatActivity {
         //On ajoute la valeur saisie à la pile
         validate();
 
-        if(pile.size() > 1) {
+        if (pile.size() > 1) {
             Float value1 = pile.pop();
             Float value2 = pile.pop();
 
@@ -187,7 +205,7 @@ public class Calculette extends AppCompatActivity {
     private void validate() {
         String valueString = saisie.getText().toString();
 
-        if(!valueString.isEmpty()) {
+        if (!valueString.isEmpty()) {
             Float value = Float.parseFloat(valueString);
 
             putStack(value);
@@ -200,6 +218,13 @@ public class Calculette extends AppCompatActivity {
      * Appui sur un chifffre : saisie du chiffre correspondant dans le champ
      */
     private void type(String chiffre) {
+        //On ne peut pas insérer deux virgules
+        if (chiffre.equals(DOT)) {
+            if (saisie.getText().toString().contains(DOT)) {
+                return;
+            }
+        }
+
         saisie.setText(saisie.getText() + chiffre);
     }
 
