@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class Calculette extends AppCompatActivity {
@@ -21,10 +23,7 @@ public class Calculette extends AppCompatActivity {
     private Stack<Float> pile = new Stack<>();
 
     TextView saisie;
-    TextView number1;
-    TextView number2;
-    TextView number3;
-    TextView number4;
+    List<TextView> numbersDisplayed = new ArrayList<>();
 
 
     @Override
@@ -34,10 +33,15 @@ public class Calculette extends AppCompatActivity {
 
         saisie = (TextView) findViewById(R.id.saisie);
 
-        number1 = (TextView) findViewById(R.id.number1);
-        number2 = (TextView) findViewById(R.id.number2);
-        number3 = (TextView) findViewById(R.id.number3);
-        number4 = (TextView) findViewById(R.id.number4);
+        numbersDisplayed.add((TextView) findViewById(R.id.number1));
+        numbersDisplayed.add((TextView) findViewById(R.id.number2));
+        numbersDisplayed.add((TextView) findViewById(R.id.number3));
+        numbersDisplayed.add((TextView) findViewById(R.id.number4));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     //LISTENERS
@@ -230,37 +234,16 @@ public class Calculette extends AppCompatActivity {
     private void refreshNumbers() {
         String valueRow;
 
-        //Number 1
-        if (pile.size() < NUMBER_ROW) {
-            valueRow = "";
-        } else {
-            valueRow = String.valueOf(pile.get(pile.size() - 4));
-        }
-        number1.setText(valueRow);
+        for (TextView number : numbersDisplayed) {
+            int indexOfNumber = numbersDisplayed.indexOf(number);
 
-        //Number 2
-        if (pile.size() < NUMBER_ROW - 1) {
-            valueRow = "";
-        } else {
-            valueRow = String.valueOf(pile.get(pile.size() - 3));
+            if (pile.size() < NUMBER_ROW - indexOfNumber) {
+                valueRow = "";
+            } else {
+                valueRow = String.valueOf(pile.get(pile.size() - (NUMBER_ROW - indexOfNumber)));
+            }
+            number.setText(valueRow);
         }
-        number2.setText(valueRow);
-
-        //Number 3
-        if (pile.size() < NUMBER_ROW - 2) {
-            valueRow = "";
-        } else {
-            valueRow = String.valueOf(pile.get(pile.size() - 2));
-        }
-        number3.setText(valueRow);
-
-        //Number 4
-        if (pile.size() < NUMBER_ROW - 3) {
-            valueRow = "";
-        } else {
-            valueRow = String.valueOf(pile.get(pile.size() - 1));
-        }
-        number4.setText(valueRow);
     }
 
     /**

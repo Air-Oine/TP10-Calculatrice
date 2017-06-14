@@ -11,7 +11,7 @@
         android:id="@+id/number1"
         android:background="@android:color/background_light"
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/padding_left_text"
 
@@ -27,7 +27,7 @@
         android:id="@+id/number2"
         android:background="@android:color/background_light"
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/padding_left_text"
 
@@ -43,7 +43,7 @@
         android:id="@+id/number3"
         android:background="@android:color/background_light"
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/padding_left_text"
 
@@ -59,7 +59,7 @@
         android:id="@+id/number4"
         android:background="@android:color/background_light"
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/padding_left_text"
 
@@ -101,6 +101,9 @@
 
         android:layout_column="0"
         android:layout_row="5"
+
+        android:textSize="@dimen/text_size_button"
+
         android:onClick="one"
         android:text="1" />
 
@@ -116,6 +119,9 @@
 
         android:layout_column="1"
         android:layout_row="5"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="2"
         android:onClick="two"/>
 
@@ -131,6 +137,9 @@
 
         android:layout_column="2"
         android:layout_row="5"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="3"
         android:onClick="three"/>
 
@@ -146,6 +155,9 @@
 
         android:layout_column="0"
         android:layout_row="6"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="4"
         android:onClick="four"/>
 
@@ -161,6 +173,9 @@
 
         android:layout_column="1"
         android:layout_row="6"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="5"
         android:onClick="five"/>
 
@@ -176,6 +191,9 @@
 
         android:layout_column="2"
         android:layout_row="6"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="6"
         android:onClick="six"/>
 
@@ -191,6 +209,9 @@
 
         android:layout_column="0"
         android:layout_row="7"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="7"
         android:onClick="seven"/>
 
@@ -206,6 +227,9 @@
 
         android:layout_column="1"
         android:layout_row="7"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="8"
         android:onClick="eight"/>
 
@@ -221,6 +245,9 @@
 
         android:layout_column="2"
         android:layout_row="7"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="9"
         android:onClick="nine"/>
 
@@ -236,6 +263,9 @@
 
         android:layout_column="1"
         android:layout_row="8"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="0"
         android:onClick="zero"/>
 
@@ -251,6 +281,9 @@
 
         android:layout_column="2"
         android:layout_row="8"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="."
         android:onClick="dot"/>
 
@@ -268,6 +301,9 @@
 
         android:layout_column="3"
         android:layout_row="5"
+
+        android:textSize="@dimen/text_size_button"
+
         android:onClick="add"
         android:text="+"
         tools:ignore="HardcodedText" />
@@ -284,6 +320,9 @@
 
         android:layout_column="3"
         android:layout_row="6"
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="-"
         tools:ignore="HardcodedText"
         android:onClick="minus"/>
@@ -300,7 +339,9 @@
 
         android:layout_column="3"
         android:layout_row="7"
-        
+
+        android:textSize="@dimen/text_size_button"
+
         android:text="/"
         tools:ignore="HardcodedText"
         android:onClick="divide"/>
@@ -308,6 +349,8 @@
     <Button
         android:id="@+id/button_multiply"
         style="@style/Widget.AppCompat.Button.Colored"
+        android:background="@color/colorPrimary"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -316,7 +359,9 @@
 
         android:layout_column="3"
         android:layout_row="8"
-        android:background="@color/colorPrimary"
+
+        android:textSize="@dimen/text_size_button"
+
         android:onClick="multiply"
         android:text="*"
         tools:ignore="HardcodedText" />
